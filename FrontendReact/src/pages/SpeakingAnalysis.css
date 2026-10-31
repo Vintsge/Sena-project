@@ -1,0 +1,356 @@
+.speaking-analysis {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0f1419;
+  width: 100%;
+}
+
+.speaking-analysis *,
+.speaking-analysis *::before,
+.speaking-analysis *::after {
+  box-sizing: border-box;
+}
+
+.speaking-analysis .tarjeta {
+  background: #1C2126;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 0;
+  border: 1px solid #3B4754;
+  width: 100%;
+}
+/* Cabecera */
+.speaking-analysis .headerAnalysis {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.arrow-left-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.arrow-left-icon img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.title-row h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.subtitulo {
+  margin: 0.25rem 0 0;
+  color: #98989f;
+  font-size: 0.9rem;
+}
+
+/*Tarjetas*/
+.speaking-analysis .contenido-analisis {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.speaking-analysis .contenido-analisis > .tarjeta,
+.speaking-analysis .fila-doble > .tarjeta {
+  margin: 0;
+}
+
+.speaking-analysis .tarjeta-ancha {
+  width: 100%;
+}
+
+.speaking-analysis .fila-doble {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.speaking-analysis .etiqueta-meta {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.speaking-analysis .valor-principal {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.speaking-analysis .unidad {
+  font-size: 1rem;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.speaking-analysis .comparacion {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.speaking-analysis .positivo,
+.speaking-analysis .reduccion {
+  color: #22c55e;
+}
+
+.speaking-analysis .aumento {
+  color: #ef4444;
+}
+
+.speaking-analysis .encabezado-grafico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.speaking-analysis .encabezado-grafico h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.speaking-analysis .encabezado-grafico h3 svg {
+  width: 18px;
+  height: 18px;
+  color: #9ca3af;
+}
+
+.speaking-analysis .numero-resaltado {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.speaking-analysis .contenedor-grafico {
+  display: grid;
+  grid-template-columns: max-content max-content minmax(0, 1fr);
+  grid-template-rows: 200px auto;
+  column-gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.speaking-analysis .rotulo-eje-y {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #9ca3af;
+  font-size: 0.7rem;
+}
+
+.speaking-analysis .eje-y {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 1.25rem;
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.speaking-analysis .area-grafico {
+  grid-column: 3;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.speaking-analysis .area-grafico svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.speaking-analysis .etiquetas-eje-x {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.speaking-analysis .etiqueta-eje-x-nombre {
+  margin: 0.25rem 0 0;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.speaking-analysis .estado {
+  background: #1d2227;
+  border: 1px solid #36414b;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+}
+
+.speaking-analysis .estado-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.speaking-analysis .estado-cabecera h3 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.speaking-analysis .estado-cabecera img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.speaking-analysis .barra-niveles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.speaking-analysis .nivel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.speaking-analysis .barra-fondo {
+  position: relative;
+  width: 100%;
+  height: 16px;
+  border-radius: 999px;
+}
+
+.speaking-analysis .barra-fondo.bajo { background: #274a35; }
+.speaking-analysis .barra-fondo.medio { background: #41391f; }
+.speaking-analysis .barra-fondo.alto { background: #482a2c; }
+
+.speaking-analysis .barra-llena {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 33%;
+  border-radius: inherit;
+  background: #4caf50;
+}
+
+.speaking-analysis .etiqueta {
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.speaking-analysis .recomendaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.speaking-analysis .cabecera-recomendaciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.speaking-analysis .cabecera-recomendaciones h4,
+.speaking-analysis .tituloReco,
+.speaking-analysis .descripcionReco {
+  margin: 0;
+}
+
+.speaking-analysis .cabecera-recomendaciones img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.speaking-analysis .tituloReco { font-weight: 600; }
+.speaking-analysis .descripcionReco { color: #9b9da0; }
+
+.speaking-analysis .alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 0.25rem;
+}
+
+.speaking-analysis .alerta img {
+  flex: 0 0 auto;
+}
+
+.speaking-analysis .alerta p {
+  margin: 0;
+  color: #898a8b;
+}
+
+.speaking-analysis .botones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 0.25rem;
+}
+
+.speaking-analysis .botones hr {
+  width: 100%;
+  margin: 0.5rem 0 0;
+}
+
+@media (max-width: 480px) {
+  .speaking-analysis {
+    padding: 1rem;
+  }
+
+  .speaking-analysis .fila-doble {
+    grid-template-columns: 1fr;
+  }
+
+  .speaking-analysis .tarjeta {
+    padding: 1.125rem;
+  }
+
+  .speaking-analysis .contenedor-grafico {
+    grid-template-rows: 160px auto;
+  }
+
+  .speaking-analysis .etiquetas-eje-x {
+    font-size: 0.6rem;
+  }
+}

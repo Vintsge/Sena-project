@@ -1,0 +1,120 @@
+.menu-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4%;
+    margin: 2%;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.menu-title{
+    align-self: flex-start;
+    margin: 0 0 5px 0;
+}
+hr{
+    margin-top: 0%;
+    margin-bottom: 4%;
+    width: 100%;
+}
+.menu-main .graytainer {
+    width: 100%;
+    max-width: 550px;
+}
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 650px;
+    gap: 25px;
+}
+
+.graytainer img {
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+    max-width: 200px;
+    display:flex;
+    object-fit: cover;
+}
+.titles {
+    font-weight: bold;
+    justify-self: center;
+}
+
+.midtics{
+    width: 100%;
+}
+.menu-main .toolbar-container {
+    width: 100%;
+    max-width: 650px;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem 0;
+    margin-top: auto;
+}
+
+.menu-main .toolbar-container hr {
+    width: 100%;
+    height: 1px;
+    margin: 0 0 0.75rem;
+    border: 0;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-main .toolsBar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.5rem, 3vw, 1.5rem);
+    padding: 0;
+    margin: 0;
+}
+
+.menu-main .iconBar {
+    display: flex;
+    min-width: 0;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu-main .iconBar p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.menu-main .iconBar img {
+    width: 28px;
+    height: 28px;
+    color: aliceblue;
+    object-fit: contain;
+}
+
+.menu-main .iconBar.active img {
+  filter: none;
+
+  /* Degradado de fondo */
+  background: linear-gradient(to right, #6704E8 0%, #1883BD 100%);
+
+  /* Mezclamos el color con el icono blanco */
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 480px) {
+    .menu-main .toolbar-container {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
+    .menu-main .toolsBar {
+        gap: 0.25rem;
+    }
+
+    .menu-main .iconBar img {
+        width: 24px;
+        height: 24px;
+    }
+}

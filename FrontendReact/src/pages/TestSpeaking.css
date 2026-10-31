@@ -1,0 +1,228 @@
+
+/* Contenedor general */
+.test-speaking {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Cabecera */
+.test-speaking .header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.arrow-left-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.arrow-left-icon img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.title-row h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.subtitulo {
+  margin: 0.25rem 0 0;
+  color: #98989f;
+  font-size: 0.9rem;
+}
+
+/* Temporizador */
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+  padding: 0.3rem 0.75rem;
+  border-radius: 12px;
+  background: #2c2c3e;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+.icono-reloj {
+  font-size: 0.85rem;
+}
+
+.timer.poco-tiempo {
+  background: #ff3b30;
+}
+
+/* Instrucciones */
+.test-speaking .test-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.test-speaking .test-instructions > p {
+  color: #d0d0d5;
+  font-size: 0.95rem;
+    margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.test-speaking .test-instructions .graytainer {
+  margin-top: 0.5rem;
+  color: #a0a0a5;
+
+  padding: 1rem 1.25rem !important; 
+  gap: 0.5rem !important; 
+  min-height: auto !important; 
+  height: fit-content !important; 
+}
+
+.tips-container.tips-container {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+}
+.test-speaking .audio-invitation {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0.5rem;
+}
+
+.test-speaking .audio-invitation {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+}
+/*-------*/
+
+.audio-recorder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.recorder-button {
+  width: 96px;
+  height: 96px;
+  border-radius: 28px;              /* forma de botón redondeado */
+  background: linear-gradient(180deg, #5A18C9 0%, #3B30AD 50%, #1B6398 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 8px 24px rgba(74, 25, 182, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.recorder-button:hover {
+  transform: scale(1.05);
+}
+
+.recorder-button:active {
+  transform: scale(0.96);
+}
+
+.recorder-button img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
+
+.audio-recorder p {
+  color: #9ca3af;
+  font-size: 14px;
+  margin: 0;
+}
+
+
+
+/*----*/
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-direction: row;
+    max-width: 800px;
+    width: 100%;
+    margin-top: 4rem;
+    margin-bottom: 0,5rem;
+}
+#btn-guardar{
+    background-color: #293038 !important;
+}
+#btn-guardar:hover{
+    background-color: #1b2025 !important;
+}
+
+.footer-test {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 0,2rem;
+    padding: 1rem 0;
+    width: 100%;
+    max-width: 280px;
+    flex-direction: row;
+    justify-content: center;
+    color: #949596;
+}
+.footer-item {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 0.5rem;
+    color: #949596;
+    font-size: 0.85rem;
+}
+.footer-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+}
+
+
+
+/* Responsive */
+@media (max-width: 767px) {
+  .test-speaking {
+    padding: 1rem;
+  }
+
+  .title-row h1 {
+    font-size: 1.15rem;
+  }
+
+  .timer {
+    margin-top: 0.5rem;
+  }
+}

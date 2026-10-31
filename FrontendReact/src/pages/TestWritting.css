@@ -1,0 +1,206 @@
+
+/* Contenedor general */
+.test-writting {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Cabecera */
+.test-writting .header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.arrow-left-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.arrow-left-icon img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.title-row h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.subtitulo {
+  margin: 0.25rem 0 0;
+  color: #98989f;
+  font-size: 0.9rem;
+}
+
+/* Temporizador */
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+  padding: 0.3rem 0.75rem;
+  border-radius: 12px;
+  background: #2c2c3e;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+.icono-reloj {
+  font-size: 0.85rem;
+}
+
+.timer.poco-tiempo {
+  background: #ff3b30;
+}
+
+/* Instrucciones */
+.test-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.test-instructions > p {
+  color: #d0d0d5;
+  font-size: 0.95rem;
+    margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.test-instructions .graytainer {
+  margin-top: 0.5rem;
+  color: #a0a0a5;
+
+  padding: 1rem 1.25rem !important; 
+  gap: 0.5rem !important; 
+  min-height: auto !important; 
+  height: fit-content !important; 
+}
+
+.test-instructions .graytainer h3 {
+
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Campo de escritura */
+.textarea-container .textarea {
+  display: block;
+  width: 100%;
+  min-height: 200px;
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  outline: none;
+  resize: vertical;
+
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+}
+
+/* Texto de ejemplo */
+.textarea-container .textarea::placeholder {
+  color: #a0a0a5;
+}
+
+/* Contador de caracteres */
+.textarea-container .char-counter {
+  margin: 0;
+  color: #a0a0a5;
+  font-size: 0.8rem;
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-direction: row;
+    max-width: 800px;
+    width: 100%;
+    margin-top: 4rem;
+    margin-bottom: 0,5rem;
+}
+#btn-guardar{
+    background-color: #293038 !important;
+}
+#btn-guardar:hover{
+    background-color: #1b2025 !important;
+}
+
+.footer-test {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 0,2rem;
+    padding: 1rem 0;
+    width: 100%;
+    max-width: 280px;
+    flex-direction: row;
+    justify-content: center;
+    color: #949596;
+}
+.footer-item {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 0.5rem;
+    color: #949596;
+    font-size: 0.85rem;
+}
+.footer-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+}
+
+
+
+/* Responsive */
+@media (max-width: 767px) {
+  .test-writting {
+    padding: 1rem;
+  }
+
+  .title-row h1 {
+    font-size: 1.15rem;
+  }
+
+  .timer {
+    margin-top: 0.5rem;
+  }
+}

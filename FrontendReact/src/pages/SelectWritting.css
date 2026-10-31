@@ -1,0 +1,238 @@
+/* ===== Contenedor General ===== */
+.select-writting {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  color: #ffffff;
+  padding: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== Cabecera ===== */
+.select-writting .header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 650px;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.select-writting .arrow-left-icon {
+  position: absolute;
+  top: 0.25rem;
+  left: 0;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1c1c1e;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  z-index: 2;
+}
+
+.select-writting .arrow-left-icon:hover {
+  background-color: #2c2c2e;
+}
+
+.select-writting .arrow-left-icon img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.select-writting .header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0 3.5rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.select-writting .header p {
+  color: #a0a0a5;
+  font-size: 1rem;
+  margin: 0 0 0 3.5rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* ===== Contenedor de Opciones ===== */
+.select-writting .options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 650px;
+  gap: 12px;
+}
+
+/* ===== Tarjetas (Graytainer) ===== */
+.graytainer {
+  display: flex;
+  align-items: center;
+  position: relative; /* Para la flecha */
+  background-color: #1c1c1e;
+  border: 1px solid #2c2c3e;
+  border-radius: 12px;
+  padding: 2rem 1.5rem; /* Espacio interno */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.graytainer:hover {
+  background-color: #252535;
+}
+
+/* Icono SVG */
+.graytainer img:first-child {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  filter: none;
+}
+
+/* Contenedor de texto */
+.graytainer .texto_container {
+  flex: 1;
+  text-align: center; /* ✅ Centramos TODO el texto */
+  margin-left: 1rem;
+  padding-right: 2rem; /* Dejamos espacio a la derecha para la flecha */
+}
+
+.graytainer .titles {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  text-align: center; /* ✅ Título centrado */
+}
+
+/* ✅ Texto descriptivo perfectamente alineado */
+.graytainer .description {
+  font-size: 0.95rem;
+  color: #88888f;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: center; /* ✅ Descripción centrada */
+  display: block;
+}
+
+/* ✅ Flecha grande y visible en la esquina */
+.graytainer .arrow-icon {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.graytainer .arrow-icon img {
+  width: 24px; /* ✅ Más grande */
+  height: 24px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9; /* ✅ Más visible */
+  display: block;
+}
+
+/* ===== Botón ===== */
+.select-writting .button-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 650px;
+}
+
+#signup-button {
+  width: 100%;
+  max-width: 420px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#signup-button:hover {
+  background-color: #0066dd;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .select-writting {
+    padding: 1rem;
+  }
+
+  .select-writting .header h1 {
+    font-size: 1.25rem;
+    margin-left: 3rem;
+  }
+
+  .select-writting .header p {
+    font-size: 0.9rem;
+    margin-left: 3rem;
+  }
+
+  .graytainer {
+    padding: 1.5rem 1rem;
+  }
+
+  .graytainer img:first-child {
+    width: 60px;
+    height: 60px;
+  }
+
+  .graytainer .titles {
+    font-size: 1.05rem;
+  }
+
+  .graytainer .description {
+    font-size: 0.9rem;
+  }
+
+  .graytainer .arrow-icon {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .graytainer .arrow-icon img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .select-writting .header h1,
+  .select-writting .header p {
+    margin-left: 2.75rem;
+  }
+
+  .graytainer {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .graytainer img:first-child {
+    width: 48px;
+    height: 48px;
+  }
+
+  .graytainer .arrow-icon img {
+    width: 20px;
+    height: 20px;
+  }
+}

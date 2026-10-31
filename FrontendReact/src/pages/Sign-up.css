@@ -1,0 +1,88 @@
+
+    form {
+        width: 100%;
+        max-width: 600px;
+    }
+
+.signup-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #0B0F14;
+    }
+
+.signup-container h1 {
+        color: #00bcd4;
+        font-family: Arial, sans-serif;
+        margin-bottom: 0.2rem;
+    }
+    .form-group {
+        margin: 0 auto 1rem auto;
+        display: flex;
+        flex-direction: column;
+        background-color: #121417;
+        padding: 2rem;
+        gap: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 8px;
+        box-shadow:  0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-label {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .form-label input,
+    .form-label select {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #1b2025;
+        border: 2px solid #374451;
+        border-radius: 24px;
+        color: #ffffff;
+        height: 45px;
+        padding: 1px 20px
+
+    }
+
+    .form-label input:focus,
+    .form-label select:focus {
+        outline: none;
+        border-color: #00bcd4;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    select {
+  /* Aumenta el valor de la derecha (el segundo o cuarto valor según tu taquigrafía) */
+  padding-right: 20px; 
+}
+
+.form-group select {
+  /* 1. Oculta por completo la flecha fea y rígida del navegador */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* 2. Añade espacio suficiente a la derecha para que no tape el texto */
+  padding-right: 35px;
+
+  /* 3. Coloca un icono propio (puedes usar un SVG en código o URL) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  
+  /* 4. Aquí controlas EXACTAMENTE dónde se ubica: a 16px del borde derecho y centrada verticalmente */
+  background-position: right 16px center;
+  background-size: 16px;
+}
