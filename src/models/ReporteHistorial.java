@@ -1,5 +1,7 @@
 package models;
 
+import java.time.LocalDateTime;
+
 public class ReporteHistorial {
     // Atributos
     private final int id_reporte;
@@ -9,6 +11,7 @@ public class ReporteHistorial {
     private final int delta_puntaje;
     private final int delta_severidad;
     private final int delta_subsets;
+    private final LocalDateTime fecha_comparacion;
 
     // Constructor (cálculo automático)
     public ReporteHistorial(
@@ -20,11 +23,13 @@ public class ReporteHistorial {
         int severidadAnterior,
         int severidadActual,
         int subsetsAnterior,
-        int subsetsActual
+        int subsetsActual,
+        LocalDateTime fecha_comparacion
     ) {
         this.id_reporte = id_reporte;
         this.id_reporte_Anterior = id_reporte_Anterior;
         this.id_reporte_Actual = id_reporte_Actual;
+        this.fecha_comparacion = fecha_comparacion;
 
         this.delta_puntaje = puntajeActual - puntajeAnterior;
         this.delta_severidad = severidadActual - severidadAnterior;
@@ -39,4 +44,5 @@ public class ReporteHistorial {
     public int getDelta_puntaje() { return delta_puntaje; }
     public int getDelta_severidad() { return delta_severidad; }
     public int getDelta_subsets() { return delta_subsets; }
+    public LocalDateTime getFecha_comparacion() { return fecha_comparacion; }
 }

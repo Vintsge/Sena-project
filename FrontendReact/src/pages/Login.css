@@ -1,195 +1,390 @@
+/* =====================================================
+   LOGIN — todo está aislado bajo .login-main para que
+   ninguna regla afecte a otras pantallas (los CSS importados
+   en React son globales).
+   ===================================================== */
+
+/* ===== Tokens (los mismos que Menú / Perfil) ===== */
 .login-main {
-  min-height: 100vh;
+  --surface: #14181f;
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.08);
+  --violet: #6704e8;
+  --blue: #1883bd;
+  --grad: linear-gradient(90deg, var(--violet) 0%, var(--blue) 100%);
+}
+
+/* ===== Página ===== */
+.login-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  min-height: 100vh;
   padding: clamp(1rem, 5vw, 2rem);
   box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+  background:
+    radial-gradient(600px 300px at 10% -5%, rgba(103, 4, 232, 0.22), transparent 70%),
+    radial-gradient(500px 280px at 95% 0%, rgba(24, 131, 189, 0.18), transparent 70%);
 }
 
+.login-main *,
+.login-main *::before,
+.login-main *::after {
+  box-sizing: border-box;
+}
+
+/* Entrada escalonada al cargar (única animación automática) */
+.login-main > * {
+  animation: login-entra 0.5s ease both;
+}
+.login-main > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+@keyframes login-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Título ===== */
 .login-main h1 {
   margin: 0 0 1.5rem 0;
-  color: #00bcd4;
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(1.8rem, 6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-align: center;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.login-container {
-  background-color: #121417;
+/* ===== Tarjeta ===== */
+.login-main .login-container {
+  width: 100%;
+  max-width: 420px;
   padding: clamp(1.25rem, 5vw, 2rem);
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
-.login-form {
+
+.login-main .login-form {
   display: flex;
   flex-direction: column;
-  width: 100%; /* Estira el contenido interno al borde */
+  width: 100%;
 }
 
-/* 3. CONTENEDORES DE INPUTS */
-.input-container {
-  width: 100%;
+/* ===== Campos ===== */
+.login-main .input-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 0.5rem 0;
+  gap: 1.1rem;
+  width: 100%;
+  padding: 0.25rem 0;
 }
 
-.input-label {
-  color: #fff;
-  font-weight: bold;
+.login-main .input-label {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
   width: 100%;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #e5e7eb;
 }
 
-.input-label input {
+.login-main .input-label input {
   width: 100%;
-  height: 45px;
-  box-sizing: border-box;
-  background-color: #1b2025;
-  border: 2px solid #374451;
-  border-radius: 24px;
-  padding: 0 18px;
-  color: white;
-  font-size: 16px;
+  height: 46px;
+  padding: 0 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
   outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.input-label input:focus {
-  border-color: #0D6BC7;
+.login-main .input-label input::placeholder {
+  color: #6b7280;
 }
 
-.input-label input::placeholder {
-  color: #8c939b;
+.login-main .input-label input:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* 4. SEPARADOR */
-.login-container > hr {
-  width: 100%;
-  border: none;
-  border-top: 1px solid #a9a9a973;
-  margin: 1.25rem 0 0.5rem;
+.login-main .input-label input:focus {
+  border-color: rgba(129, 140, 248, 0.7);
+  background-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(103, 4, 232, 0.22);
 }
 
-/* 5. REDES SOCIALES (ESTIRAMIENTO CORRECTO) */
-.social-login {
+/* Evita el fondo blanco/amarillo del autocompletado del navegador */
+.login-main .input-label input:-webkit-autofill,
+.login-main .input-label input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  box-shadow: 0 0 0 1000px #1b2029 inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* ===== Checkbox ===== */
+.login-main .checkbox-label {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 0;
-  width: 100%; /* Asegura que tome el ancho disponible */
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.2rem 0 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
 }
 
-.social-button {
+.login-main .checkbox-label:hover {
+  color: #e5e7eb;
+}
+
+.login-main .checkbox-label input {
+  appearance: none;
+  -webkit-appearance: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  height: 45px;
-  border-radius: 24px;
-  cursor: pointer;
-  width: 100%; /* Cambiado a 100% para que se acople al max-width de la tarjeta */
-  box-sizing: border-box;
-}
-
-#google-login {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-  border: none;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-#apple-login {
-  background-color: #000;
-  color: white;
-  border: none;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.social-icon {
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
+  margin: 0;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.login-main .checkbox-label input:checked {
+  background: var(--grad);
+  border-color: transparent;
+}
+
+.login-main .checkbox-label input:checked::after {
+  content: "✓";
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.login-main .checkbox-label input:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+/* ===== Botón principal (componente Boton) ===== */
+.login-main .login-form button {
+  width: 100%;
+  height: 46px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  cursor: pointer;
+  background: var(--grad);
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(103, 4, 232, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.login-main .login-form button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 28px rgba(103, 4, 232, 0.5);
+}
+
+.login-main .login-form button:active {
+  transform: translateY(0);
+}
+
+.login-main .login-form button:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 3px;
+}
+
+/* ===== Separador ===== */
+.login-main .login-container > hr {
+  width: 100%;
+  height: 1px;
+  margin: 1.5rem 0 1.25rem;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.4), transparent);
+}
+
+/* ===== Redes sociales ===== */
+.login-main .social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.login-main .social-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  height: 46px;
+  font-family: inherit;
+  font-size: 0.97rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.social-icon img {
+.login-main .social-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.login-main .social-button:active {
+  transform: translateY(0);
+}
+
+.login-main .social-button:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 3px;
+}
+
+.login-main #google-login {
+  color: #111111;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.login-main #apple-login {
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.login-main #apple-login:hover {
+  border-color: rgba(129, 140, 248, 0.55);
+}
+
+.login-main .social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.login-main .social-icon img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* 6. CHECKBOX */
-.checkbox-label {
-  color: #ffffff5f;
-  font-weight: 600;
-  display: flex;
-  align-items: center; 
-  gap: 10px;
-  margin-bottom: 0.8em;
-  cursor: pointer;
-}
-
-.checkbox-label input {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  margin: 0;
-  background-color: #252c33;
-  border: 3px solid #3b4653;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.checkbox-label input:checked {
-  background-color: #0D6BC7;
-  border-color: #0D6BC7;
-}
-
-.checkbox-label input:checked::after {
-  content: "✓";
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-}
-
+/* ===== Responsive ===== */
 @media (max-width: 480px) {
   .login-main {
     justify-content: flex-start;
-    padding: 1.25rem 1rem;
+    padding: 2rem 1rem;
   }
 
   .login-main h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 
-  .login-container {
-    border-radius: 12px;
+  .login-main .login-container {
+    border-radius: 16px;
   }
 
-  .input-container {
+  .login-main .input-container {
     gap: 1rem;
   }
 
-  .social-button {
-    min-height: 45px;
+  .login-main .social-button {
+    min-height: 46px;
     height: auto;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 1rem;
     font-size: 0.95rem;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .login-main > * {
+    animation: none;
+  }
+
+  .login-main *,
+  .login-main *::before {
+    transition: none !important;
+  }
+}
+
+.login-main .login-signup {
+  margin: 1.25rem 0 0;
+  font-size: 0.92rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.login-main .login-signup a {
+  color: #7dd3fc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-main .login-signup a:hover {
+  text-decoration: underline;
+}
+
+.login-main .login-signup a:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Botón "Entrar": mismo tamaño que los botones de Google y Apple */
+.login-main .login-form button.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 0 1rem !important;
+}
+
+@media (max-width: 480px) {
+  .login-main .login-form button.login-button {
+    min-height: 46px !important;
+    height: auto !important;
+    padding: 0.7rem 1rem !important;
   }
 }

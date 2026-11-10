@@ -1,25 +1,44 @@
+
 package models;
 
 import java.time.LocalDate;
 
 public class User {
+
     // Atributos
     private final int id;
     private String nombre;
-    private int edad;
+    private final LocalDate fechaNacimiento;
     private String telefono;
     private final LocalDate fechaRegistro;
+    private String nivelEducativo;
 
-    // Constructor
-    public User(String nombre, int edad, String telefono, int id) {
+    // Constructor para usuarios nuevos
+    public User(String nombre, LocalDate fechaNacimiento,
+                String telefono, String nivelEducativo) {
+
+        this.id = 0; // MySQL asignará el ID
         this.nombre = nombre;
-        this.edad = edad;
-        this.fechaRegistro = LocalDate.now();
-        this.id = id;
+        this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
+        this.fechaRegistro = LocalDate.now();
+        this.nivelEducativo = nivelEducativo;
     }
 
-    // Metodos get y set
+    // Constructor para recuperar usuarios de MySQL
+    public User(int id, String nombre, LocalDate fechaNacimiento,
+                String telefono, LocalDate fechaRegistro,
+                String nivelEducativo) {
+
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.fechaRegistro = fechaRegistro;
+        this.nivelEducativo = nivelEducativo;
+    }
+
+    // Getters y setters
     public int getId() {
         return id;
     }
@@ -32,12 +51,8 @@ public class User {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public String getTelefono() {
@@ -50,5 +65,13 @@ public class User {
 
     public LocalDate getFechaRegistro() {
         return fechaRegistro;
+    }
+
+    public String getNivelEducativo() {
+        return nivelEducativo;
+    }
+
+    public void setNivelEducativo(String nivelEducativo) {
+        this.nivelEducativo = nivelEducativo;
     }
 }

@@ -1,9 +1,7 @@
 import './Historial.css';
 import DownFilter from '../assets/filter-down.svg';
 import UpFilter from '../assets/filter-up.svg';
-import Inicio from '../assets/house.svg';
-import History from '../assets/history.svg';
-import User from '../assets/perfilUser.svg';
+import BottomNav from '../components/Bottomnav';
 import { useState, useRef, useEffect } from "react";
 
 function SortFilter({ sort, onSortChange }) {
@@ -14,18 +12,26 @@ function SortFilter({ sort, onSortChange }) {
     const onClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   return (
     <div className="sort-wrapper" ref={ref}>
       <button
-        className="sort-btn"
+        className={`sort-btn ${open ? "open" : ""}`}
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
+        aria-haspopup="true"
       >
-        <img src={DownFilter} alt="Ordenar" />
+        <img src={sort === "recent" ? DownFilter : UpFilter} alt="Ordenar" />
       </button>
 
       {open && (
@@ -35,14 +41,14 @@ function SortFilter({ sort, onSortChange }) {
             onClick={() => { onSortChange("recent"); setOpen(false); }}
           >
             <img src={DownFilter} alt="" className="sort-ico" />
-            Más Reciente
+            Más reciente
           </button>
           <button
             className={`sort-option ${sort === "oldest" ? "active" : ""}`}
             onClick={() => { onSortChange("oldest"); setOpen(false); }}
           >
             <img src={UpFilter} alt="" className="sort-ico" />
-            Menos Reciente
+            Menos reciente
           </button>
         </div>
       )}
@@ -56,8 +62,17 @@ const pruebasIniciales = [
   { id: 3, titulo: "Prueba 3", descripcion: "Descripción de la prueba", fecha: "2023-01-03" },
   { id: 4, titulo: "Prueba 4", descripcion: "Descripción de la prueba", fecha: "2023-01-10" },
   { id: 5, titulo: "Prueba 5", descripcion: "Descripción de la prueba", fecha: "2023-01-22" },
-  { id: 6, titulo: "Prueba 6", descripcion: "Descripción de la prueba", fecha: "2023-02-3" },
+  { id: 6, titulo: "Prueba 6", descripcion: "Descripción de la prueba", fecha: "2023-02-03" },
 ];
+
+// Formatea "2023-02-03" como "3 feb 2023" (en UTC para evitar desfases de zona horaria)
+const formatearFecha = (iso) =>
+  new Date(iso).toLocaleDateString("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 
 function Historial() {
   const [sort, setSort] = useState("recent");
@@ -70,53 +85,44 @@ function Historial() {
 
   return (
     <div className="historial">
-        <div className=''>
-            <h1>Historial de Pruebas</h1>
-            <p>Aquí puedes ver el historial de tus pruebas realizadas.</p>
-        </div>
-      <div>
+      <header className="historial-header">
+        <h1>Historial de Pruebas</h1>
+        <p>Aquí puedes ver el historial de tus pruebas realizadas.</p>
+        <span className="historial-count">{pruebas.length} pruebas</span>
+      </header>
+
+      <div className="historial-tabla">
         <table>
           <thead>
             <tr>
-              <th>Titulo de la prueba</th>
+              <th>Título de la prueba</th>
               <th>
-                Fecha/Hora
-                <SortFilter sort={sort} onSortChange={setSort} />
+                <div className="th-fecha">
+                  Fecha/Hora
+                  <SortFilter sort={sort} onSortChange={setSort} />
+                </div>
               </th>
             </tr>
           </thead>
           <tbody>
-            {pruebas.map((p) => (
-              <tr key={p.id}>
+            {pruebas.map((p, i) => (
+              <tr key={p.id} style={{ "--i": i }}>
                 <td>
                   {p.titulo}
                   <p>{p.descripcion}</p>
                 </td>
-                <td>{p.fecha}</td>
+                <td>
+                  <time dateTime={p.fecha} className="fecha-chip">
+                    {formatearFecha(p.fecha)}
+                  </time>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-
       </div>
 
-    <footer className='toolbar-container'>
-        <hr />
-        <div className='toolsBar'>
-            <div className='iconBar'>
-                <img src = {Inicio} alt="Home page"/>
-                <p>Inicio</p>
-            </div>
-            <div className='iconBar'>
-                <img src= {History} alt="Historial" /> 
-                <p>Historial</p>
-            </div>
-            <div className='iconBar'>
-                <img src={User} alt="Perfil" />
-                <p>Perfil</p>
-            </div>
-        </div>
-    </footer>
+      <BottomNav />
     </div>
   );
 }

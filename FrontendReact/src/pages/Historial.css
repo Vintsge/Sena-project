@@ -1,69 +1,108 @@
-.historial{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-/*---*/
-/* Contenedor principal */
+/* ===== Tokens ===== */
 .historial {
-  max-width: 1200px;  /* ← Antes era 900px, ahora más ancho */
-  margin: 0 auto;
-  padding: 2.5rem 2rem; /* ← Más espacio alrededor */
-  color: #e5e7eb;
-  font-family: system-ui, -apple-system, sans-serif;
+  --bg: #0b0d14;
+  --surface: #14181f;
+  --surface-2: #1b2130;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.08);
+  --violet: #6704e8;
+  --blue: #1883bd;
+  --grad: linear-gradient(90deg, var(--violet) 0%, var(--blue) 100%);
 }
 
-/* Encabezado */
-.historial > div:first-child {
+/* ===== Contenedor principal ===== */
+.historial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 85vh;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 7rem; /* espacio inferior para la barra flotante */
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  background:
+    radial-gradient(600px 300px at 10% -5%, rgba(103, 4, 232, 0.22), transparent 70%),
+    radial-gradient(500px 280px at 95% 0%, rgba(24, 131, 189, 0.18), transparent 70%);
+}
+
+/* ===== Encabezado ===== */
+.historial-header {
+  width: 100%;
   margin-bottom: 2.5rem;
 }
 
 .historial h1 {
-  font-size: 2rem; /* ← Más grande */
-  font-weight: 700;
   margin: 0 0 0.75rem 0;
-  color: #ffffff;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.historial > div:first-child p {
-  margin: 0;
-  color: #9ca3af;
+.historial-header p {
+  margin: 0 0 1.25rem 0;
+  color: var(--muted);
   font-size: 1rem;
 }
 
-/* Tabla */
+.historial-count {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e0e7ff;
+  border-radius: 999px;
+  background: rgba(103, 4, 232, 0.18);
+  border: 1px solid rgba(129, 140, 248, 0.35);
+}
+
+/* ===== Tabla ===== */
+.historial-tabla {
+  width: 100%;
+}
+
 .historial table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  border-radius: 14px;
+  border-radius: 18px;
   overflow: hidden;
-  background: #14181f;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
 /* Cabecera */
 .historial thead {
-  background: #1f2937;
+  background: linear-gradient(180deg, #232b3d 0%, #1b2130 100%);
 }
 
 .historial th {
-  padding: 1.25rem 1.75rem; /* ← Más relleno horizontal */
+  padding: 1.25rem 1.75rem;
   text-align: left;
   font-weight: 600;
   font-size: 0.95rem;
   color: #f3f4f6;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--line);
 }
 
 .historial th:first-child {
-  width: 70%; /* ← Da más espacio a la columna del título */
+  width: 70%;
 }
 
 .historial th:last-child {
-  width: 30%; /* ← Fecha más compacta */
+  width: 30%;
+}
+
+.th-fecha {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -71,70 +110,127 @@
 
 /* Cuerpo */
 .historial td {
-  padding: 1.75rem; /* ← Mucho más espacio vertical */
+  padding: 1.5rem 1.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: middle;
 }
 
 .historial tbody tr {
-  transition: background-color 0.2s ease;
+  position: relative;
+  transition: background-color 0.25s ease;
+  animation: fila-entra 0.45s ease both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* Barra de acento a la izquierda de cada fila */
+.historial tbody tr td:first-child {
+  position: relative;
+}
+
+.historial tbody tr td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--grad);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .historial tbody tr:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(90deg, rgba(103, 4, 232, 0.1) 0%, rgba(24, 131, 189, 0.04) 100%);
+}
+
+.historial tbody tr:hover td:first-child::before {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .historial tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Título y descripción dentro de la celda */
+/* Título y descripción */
 .historial td:first-child {
-  font-weight: 500;
+  font-weight: 600;
   color: #ffffff;
   font-size: 1.05rem;
 }
 
 .historial td:first-child p {
-  margin: 0.5rem 0 0 0;
+  margin: 0.4rem 0 0 0;
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: var(--muted);
   font-weight: normal;
-  line-height: 1.5; /* ← Mejora legibilidad */
+  line-height: 1.5;
 }
 
-/* Fecha */
+/* Fecha como chip */
 .historial td:last-child {
   color: #d1d5db;
   font-size: 0.95rem;
 }
 
-/* Botón filtro */
+.fecha-chip {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  color: #dbeafe;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(24, 131, 189, 0.14);
+  border: 1px solid rgba(125, 211, 252, 0.25);
+}
+
+@keyframes fila-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Botón filtro ===== */
 .sort-wrapper {
   position: relative;
   display: inline-flex;
 }
 
 .sort-btn {
-  background: transparent;
-  border: none;
-  padding: 6px 8px;
-  cursor: pointer;
-  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.sort-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+.sort-btn:hover,
+.sort-btn.open {
+  background: rgba(103, 4, 232, 0.22);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+.sort-btn:focus-visible,
+.sort-option:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
 }
 
 .sort-btn img {
   width: 18px;
   height: 18px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /* Dropdown */
@@ -142,13 +238,26 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  min-width: 220px; /* ← Más ancho */
-  background: #1f2937;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  min-width: 220px;
   padding: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: rgba(31, 41, 55, 0.96);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
   z-index: 100;
+  animation: dropdown-abre 0.15s ease;
+}
+
+@keyframes dropdown-abre {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .sort-option {
@@ -156,20 +265,23 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 12px 16px; /* ← Más cómodo */
+  padding: 12px 16px;
   background: transparent;
   border: none;
-  border-radius: 6px;
-  color: #e5e7eb;
+  border-radius: 8px;
+  color: var(--text);
   cursor: pointer;
   text-align: left;
   font-size: 0.95rem;
   transition: background-color 0.2s ease;
 }
 
-.sort-option:hover,
+.sort-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .sort-option.active {
-  background: rgba(99, 102, 241, 0.15);
+  background: linear-gradient(90deg, rgba(103, 4, 232, 0.35), rgba(24, 131, 189, 0.25));
   color: #eef2ff;
 }
 
@@ -177,80 +289,192 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/*---*/
+/* ===== Barra inferior flotante ===== */
 .historial .toolbar-container {
-    width: 100%;
-    max-width: 650px;
-    box-sizing: border-box;
-    padding: 0.75rem 1rem 0;
-    margin-top: auto;
-}
-
-.historial .toolbar-container hr {
-    width: 100%;
-    height: 1px;
-    margin: 0 0 0.75rem;
-    border: 0;
-    background: rgba(255, 255, 255, 0.08);
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 1.5rem);
+  max-width: 480px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  background: rgba(20, 24, 31, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  z-index: 50;
 }
 
 .historial .toolsBar {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.5rem, 3vw, 1.5rem);
-    padding: 0;
-    margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.25rem;
+  padding: 0;
+  margin: 0;
 }
 
 .historial .iconBar {
-    display: flex;
-    min-width: 0;
-    gap: 0.4rem;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  min-width: 0;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.55rem 0.25rem;
+  border-radius: 16px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.historial .iconBar:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
 .historial .iconBar p {
-    margin: 0;
-    font-size: 0.75rem;
-    line-height: 1.2;
-    text-align: center;
-    white-space: nowrap;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .historial .iconBar img {
-    width: 28px;
-    height: 28px;
-    color: aliceblue;
-    object-fit: contain;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+/* Pestaña activa: píldora con el degradado original */
+.historial .iconBar.active {
+  background: var(--grad);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(103, 4, 232, 0.45);
 }
 
 .historial .iconBar.active img {
-  filter: none;
+  opacity: 1;
+}
 
-  /* Degradado de fondo */
-  background: linear-gradient(to right, #6704E8 0%, #1883BD 100%);
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .historial {
+    padding: 1.5rem 0.75rem 7rem;
+  }
 
-  /* Mezclamos el color con el icono blanco */
-  mix-blend-mode: multiply;
+  .historial-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .historial h1 {
+    font-size: 1.8rem;
+  }
+
+  /* La tabla pasa a tarjetas */
+  .historial table,
+  .historial tbody,
+  .historial tr,
+  .historial td {
+    display: block;
+  }
+
+  .historial table {
+    overflow: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Cabecera: solo se mantiene el control de orden */
+  .historial thead {
+    display: block;
+    margin-bottom: 0.75rem;
+    background: transparent;
+  }
+
+  .historial thead tr {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .historial th {
+    padding: 0;
+    border: none;
+  }
+
+  .historial th:first-child {
+    display: none;
+  }
+
+  .historial th:last-child {
+    width: auto;
+  }
+
+  .historial tbody tr {
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+
+  .historial tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .historial td {
+    padding: 0.8rem 1rem;
+    border-bottom: none;
+  }
+
+  .historial td:first-child {
+    padding-bottom: 0.35rem;
+  }
+
+  .historial td:last-child {
+    padding-top: 0.25rem;
+  }
+
+  .historial td:first-child p {
+    margin-top: 0.35rem;
+  }
+
+  .sort-dropdown {
+    min-width: 180px;
+    right: 0;
+  }
 }
 
 @media (max-width: 480px) {
-    .historial .toolbar-container {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
-    }
+  .historial .iconBar img {
+    width: 24px;
+    height: 24px;
+  }
 
-    .historial .toolsBar {
-        gap: 0.25rem;
-    }
+  .historial .iconBar p {
+    font-size: 0.7rem;
+  }
+}
 
-    .historial .iconBar img {
-        width: 24px;
-        height: 24px;
-    }
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .historial tbody tr,
+  .sort-dropdown {
+    animation: none;
+  }
+
+  .historial *,
+  .historial *::before {
+    transition: none !important;
+  }
 }

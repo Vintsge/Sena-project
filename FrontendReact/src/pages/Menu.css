@@ -1,120 +1,257 @@
+/* ===== Tokens (los mismos que Historial) ===== */
 .menu-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4%;
-    margin: 2%;
-    min-height: 100vh;
-    box-sizing: border-box;
+  --surface: #14181f;
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.08);
+  --violet: #6704e8;
+  --blue: #1883bd;
+  --grad: linear-gradient(90deg, var(--violet) 0%, var(--blue) 100%);
 }
-.menu-title{
-    align-self: flex-start;
-    margin: 0 0 5px 0;
+
+/* ===== Contenedor principal ===== */
+.menu-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4% 4% 7rem; /* espacio inferior para la barra flotante */
+  margin: 2%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background:
+    radial-gradient(600px 300px at 10% -5%, rgba(103, 4, 232, 0.22), transparent 70%),
+    radial-gradient(500px 280px at 95% 0%, rgba(24, 131, 189, 0.18), transparent 70%);
 }
-hr{
-    margin-top: 0%;
-    margin-bottom: 4%;
-    width: 100%;
+
+/* ===== Encabezado ===== */
+.midtics {
+  width: 100%;
 }
-.menu-main .graytainer {
-    width: 100%;
-    max-width: 550px;
+
+.menu-title {
+  align-self: flex-start;
+  margin: 0 0 0.6rem 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
+
+.midtics hr {
+  width: 100%;
+  height: 1px;
+  margin: 0 0 2rem 0;
+  border: 0;
+  background: linear-gradient(90deg, rgba(103, 4, 232, 0.6), rgba(24, 131, 189, 0.3), transparent);
+}
+
+/* ===== Tarjetas ===== */
 .menu-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 650px;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 650px;
+  gap: 25px;
 }
 
-.graytainer img {
-    width: 100%;
-    height: 100%;
-    max-height: 200px;
-    max-width: 200px;
-    display:flex;
-    object-fit: cover;
+/* Entrada escalonada al cargar (única animación automática) */
+.menu-container > * {
+  animation: tarjeta-entra 0.5s ease both;
 }
-.titles {
-    font-weight: bold;
-    justify-self: center;
+.menu-container > *:nth-child(1) { animation-delay: 0ms; }
+.menu-container > *:nth-child(2) { animation-delay: 70ms; }
+.menu-container > *:nth-child(3) { animation-delay: 140ms; }
+.menu-container > *:nth-child(4) { animation-delay: 210ms; }
+
+@keyframes tarjeta-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.midtics{
-    width: 100%;
+.menu-main .graytainer {
+  width: 100%;
+  max-width: 550px;
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
+
+.menu-main .graytainer:hover {
+  transform: translateY(-3px);
+  border-color: rgba(129, 140, 248, 0.55);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(103, 4, 232, 0.25),
+    0 0 28px rgba(24, 131, 189, 0.18);
+}
+
+.menu-main .graytainer img {
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
+  max-width: 200px;
+  display: flex;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.menu-main .titles {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  justify-self: center;
+}
+
+.menu-main .description {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+
+
+/* Layout horizontal: imagen + texto en la misma fila.
+   Graytainer usa flex-wrap: wrap; sin esto, el texto (cuyo ancho "natural" es
+   el de la frase completa) no cabía junto a la imagen y saltaba a otra línea. */
+.menu-main .graytainer .texto_container {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.menu-main .graytainer img {
+  flex: 0 1 auto;
+}
+
+/* ===== Barra inferior flotante (igual que Historial) ===== */
 .menu-main .toolbar-container {
-    width: 100%;
-    max-width: 650px;
-    box-sizing: border-box;
-    padding: 0.75rem 1rem 0;
-    margin-top: auto;
-}
-
-.menu-main .toolbar-container hr {
-    width: 100%;
-    height: 1px;
-    margin: 0 0 0.75rem;
-    border: 0;
-    background: rgba(255, 255, 255, 0.08);
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 1.5rem);
+  max-width: 480px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  background: rgba(20, 24, 31, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  z-index: 50;
 }
 
 .menu-main .toolsBar {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.5rem, 3vw, 1.5rem);
-    padding: 0;
-    margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.25rem;
+  padding: 0;
+  margin: 0;
 }
 
 .menu-main .iconBar {
-    display: flex;
-    min-width: 0;
-    gap: 0.4rem;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  min-width: 0;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.55rem 0.25rem;
+  border-radius: 16px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-main .iconBar:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
 .menu-main .iconBar p {
-    margin: 0;
-    font-size: 0.75rem;
-    line-height: 1.2;
-    text-align: center;
-    white-space: nowrap;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .menu-main .iconBar img {
-    width: 28px;
-    height: 28px;
-    color: aliceblue;
-    object-fit: contain;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+/* Pestaña activa: píldora con el degradado original */
+.menu-main .iconBar.active {
+  background: var(--grad);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(103, 4, 232, 0.45);
 }
 
 .menu-main .iconBar.active img {
-  filter: none;
-
-  /* Degradado de fondo */
-  background: linear-gradient(to right, #6704E8 0%, #1883BD 100%);
-
-  /* Mezclamos el color con el icono blanco */
-  mix-blend-mode: multiply;
+  opacity: 1;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 480px) {
-    .menu-main .toolbar-container {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
-    }
+  .menu-main {
+    padding: 6% 4% 7rem;
+  }
 
-    .menu-main .toolsBar {
-        gap: 0.25rem;
-    }
+  .menu-title {
+    font-size: 1.6rem;
+  }
 
-    .menu-main .iconBar img {
-        width: 24px;
-        height: 24px;
-    }
+  .menu-main .graytainer img {
+    max-height: 120px;
+    max-width: 120px;
+  }
+
+  .menu-main .iconBar img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .menu-main .iconBar p {
+    font-size: 0.7rem;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .menu-container > * {
+    animation: none;
+  }
+
+  .menu-main *,
+  .menu-main *::before {
+    transition: none !important;
+  }
+}
+
+/* Graytainer lleva padding (y ahora borde): sin border-box se pasa del ancho */
+.menu-main .graytainer {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Tarjetas del menú envueltas en enlace */
+.menu-main .card-link {
+  max-width: 550px;
 }

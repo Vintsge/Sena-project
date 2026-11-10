@@ -1,17 +1,39 @@
 import './TextAnalysis.css';
+import { useNavigate } from 'react-router-dom';
 import ArrowLeft from '../assets/arrow-left.svg';
 import Alert from '../assets/alert.svg'
 import Right from '../assets/arrow-right.svg'
 import Boton from '../components/Boton';
 
+// Puntos del gráfico en el sistema de coordenadas del SVG (400 x 200)
+const PUNTOS = [
+  { x: 0, y: 150 },
+  { x: 67, y: 133 },
+  { x: 133, y: 100 },
+  { x: 200, y: 83 },
+  { x: 267, y: 117 },
+  { x: 333, y: 100 },
+  { x: 400, y: 83 },
+];
+
+const LINEA = PUNTOS.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+const AREA = `${LINEA} L 400 200 L 0 200 Z`;
+
 function TextAnalysis() {
+  const navigate = useNavigate();
+
   return (
     <div className="text-Analysis">
-      {/* Cabecera — TU estructura intacta */}
+      {/* Cabecera */}
       <div className="headerAnalysis">
-        <i className="arrow-left-icon">
-          <img src={ArrowLeft} alt="Flecha izquierda" />
-        </i>
+        <button
+          type="button"
+          className="arrow-left-icon"
+          aria-label="Volver"
+          onClick={() => navigate('/menu')}
+        >
+          <img src={ArrowLeft} alt="" />
+        </button>
         <div className="header-left">
           <div className="title-row">
             <h1>Análisis de Test de Escritura</h1>
@@ -20,7 +42,6 @@ function TextAnalysis() {
         </div>
       </div>
 
-      {/* Contenido recreado */}
       <div className="contenido-analisis">
         {/* Velocidad de escritura */}
         <div className="tarjeta tarjeta-ancha">
@@ -47,7 +68,7 @@ function TextAnalysis() {
         <div className="tarjeta tarjeta-ancha">
           <div className="encabezado-grafico">
             <h3>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M3 3v18h18" />
                 <path d="M18 9l-5 5-4-4-4 4" />
               </svg>
@@ -55,7 +76,7 @@ function TextAnalysis() {
             </h3>
             <span className="numero-resaltado">1</span>
           </div>
-          
+
           <div className="contenedor-grafico">
             <div className="rotulo-eje-y">Pausas</div>
             <div className="eje-y" aria-hidden="true">
@@ -72,42 +93,51 @@ function TextAnalysis() {
                 role="img"
                 aria-label="Cantidad de pausas largas entre 0 y 4, durante 0 a 180 segundos"
               >
+                <defs>
+                  <linearGradient id="analisis-linea" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="400" y2="0">
+                    <stop offset="0%" stopColor="#6704E8" />
+                    <stop offset="100%" stopColor="#1883BD" />
+                  </linearGradient>
+                  <linearGradient id="analisis-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6704E8" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#1883BD" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+
                 {/* Rejilla */}
-                <line x1="0" y1="0" x2="400" y2="0" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                
+                {[0, 50, 100, 150, 200].map((y) => (
+                  <line
+                    key={y}
+                    x1="0" y1={y} x2="400" y2={y}
+                    stroke="rgba(255,255,255,0.08)"
+                    strokeWidth="1"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
+
                 {/* Área sombreada */}
+                <path d={AREA} fill="url(#analisis-area)" />
+
+                {/* Línea */}
                 <path
-                  d="M 0 150 L 67 133 L 133 100 L 200 83 L 267 117 L 333 100 L 400 83 L 400 200 L 0 200 Z"
-                  fill="rgba(59, 130, 246, 0.1)"
-                />
-                
-                {/* Línea azul */}
-                <path
-                  d="M 0 150 L 67 133 L 133 100 L 200 83 L 267 117 L 333 100 L 400 83"
+                  d={LINEA}
                   fill="none"
-                  stroke="#3b82f6"
+                  stroke="url(#analisis-linea)"
                   strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
                 />
-                
-                {/* Puntos */}
-                {[
-                  { x: 0, y: 150 },
-                  { x: 67, y: 133 },
-                  { x: 133, y: 100 },
-                  { x: 200, y: 83 },
-                  { x: 267, y: 117 },
-                  { x: 333, y: 100 },
-                  { x: 400, y: 83 },
-                ].map((p, i) => (
-                  <circle key={i} cx={p.x} cy={p.y} r="5" fill="#3b82f6" />
-                ))}
               </svg>
+
+              {/* Puntos en HTML para que no se deformen con el SVG estirado */}
+              {PUNTOS.map((p, i) => (
+                <span
+                  key={i}
+                  className="punto"
+                  style={{ left: `${(p.x / 400) * 100}%`, top: `${(p.y / 200) * 100}%` }}
+                />
+              ))}
             </div>
             <div className="etiquetas-eje-x">
               <span>0</span>
@@ -123,17 +153,11 @@ function TextAnalysis() {
         </div>
 
         <div className="tarjeta tarjeta-ancha">
-          <p className="etiqueta-meta">Deteccion de Patrones Cognitivos</p>
+          <p className="etiqueta-meta">Detección de Patrones Cognitivos</p>
           <ul>
-            <li>
-                Aumento de las pausas después de 90 segundos
-            </li>
-            <li>
-                Disminución de la velocidad de escritura en un 18%
-            </li>
-            <li>
-                Errores repetidos en palabras comunes
-            </li>
+            <li>Aumento de las pausas después de 90 segundos</li>
+            <li>Disminución de la velocidad de escritura en un 18%</li>
+            <li>Errores repetidos en palabras comunes</li>
           </ul>
         </div>
 
@@ -142,12 +166,12 @@ function TextAnalysis() {
             <h3>Nivel de Riesgo</h3>
             <img src={Alert} alt="" aria-hidden="true" />
           </div>
-          <div className="barra-niveles">
+          <div className="barra-niveles" role="img" aria-label="Nivel de riesgo: bajo">
             <div className="nivel">
               <div className="barra-fondo bajo">
                 <div className="barra-llena"></div>
               </div>
-              <span className="etiqueta">Low</span>
+              <span className="etiqueta activa">Low</span>
             </div>
             <div className="nivel">
               <div className="barra-fondo medio"></div>
@@ -161,31 +185,30 @@ function TextAnalysis() {
         </section>
 
         <div className="bloque-opcion recomendaciones">
-            <div className="cabecera-recomendaciones">
-              <h4>Recomendaciones</h4>
-              <img src={Right} alt="Flecha derecha" />
-            </div>
-          <p className='tituloReco'>Titulo Recomendacion</p>
-          <p className='descripcionReco'>Descripcion</p>
+          <div className="cabecera-recomendaciones">
+            <h4>Recomendaciones</h4>
+            <img src={Right} alt="" />
           </div>
+          <p className="tituloReco">Título de la recomendación</p>
+          <p className="descripcionReco">Descripción</p>
+        </div>
       </div>
-      <div className='alerta'>
-        <img src={Alert} alt="Signo Alerta" />
+
+      <div className="alerta">
+        <img src={Alert} alt="Signo de alerta" />
         <p>Este análisis es orientativo y no sustituye la evaluación de un profesional. Para un diagnóstico preciso, consulte a un especialista.</p>
       </div>
 
-      <div className='botones'>
-        <Boton id='email'>
-            Enviar Via Email
+      <div className="botones">
+        <Boton id="email">
+          Enviar vía Email
         </Boton>
-        <Boton id = 'evaluacion'>
-            Nueva Evaluación
+        <Boton id="evaluacion" onClick={() => navigate('/select-writting')}>
+          Nueva Evaluación
         </Boton>
-        <Boton id = 'atras'>
-            Atras
+        <Boton id="atras" onClick={() => navigate('/menu')}>
+          Atrás
         </Boton>
-
-        <hr />
       </div>
     </div>
   );

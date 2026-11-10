@@ -1,10 +1,29 @@
-/* ===== PÁGINA PRINCIPAL ===== */
+/* =====================================================
+   PERFIL — todo está aislado bajo .perfil-pagina para que
+   ninguna regla afecte a otras pantallas (los CSS importados
+   en React son globales).
+   ===================================================== */
+
+/* ===== Tokens (los mismos que Menú / Historial) ===== */
 .perfil-pagina {
-  background: #121417;
-  font-family: system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
+  --surface: #14181f;
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.08);
+  --violet: #6704e8;
+  --blue: #1883bd;
+  --grad: linear-gradient(90deg, var(--violet) 0%, var(--blue) 100%);
+}
+
+/* ===== Página ===== */
+.perfil-pagina {
   display: flex;
-  flex-direction: column; /* Empuja la barra hacia abajo */
+  flex-direction: column;
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+  background:
+    radial-gradient(600px 300px at 10% -5%, rgba(103, 4, 232, 0.22), transparent 70%),
+    radial-gradient(500px 280px at 95% 0%, rgba(24, 131, 189, 0.18), transparent 70%);
 }
 
 .perfil-pagina *,
@@ -13,325 +32,462 @@
   box-sizing: border-box;
 }
 
-/* Contenido CENTRADO */
-.contenedor-centrado {
-  max-width: 720px;
+/* Contenido centrado */
+.perfil-pagina .contenedor-centrado {
+  flex: 1;
+  width: 100%;
+  max-width: 650px;
   margin: 0 auto;
-  width: 100%;
-  padding: 2rem clamp(1rem, 4vw, 2rem);
-  flex: 1; /* Ocupa el espacio disponible */
+  padding: 2rem clamp(1rem, 4vw, 1.5rem) 7rem; /* espacio inferior para la barra flotante */
 }
 
-/* ===== TARJETAS ===== */
-.tarjeta {
-  box-sizing: border-box;
-  background: #1C2126;
-  border-radius: 16px;
+/* Entrada escalonada al cargar (única animación automática) */
+.perfil-pagina .contenedor-centrado > * {
+  animation: perfil-entra 0.5s ease both;
+}
+.perfil-pagina .contenedor-centrado > *:nth-child(1) { animation-delay: 0ms; }
+.perfil-pagina .contenedor-centrado > *:nth-child(2) { animation-delay: 70ms; }
+.perfil-pagina .contenedor-centrado > *:nth-child(3) { animation-delay: 140ms; }
+.perfil-pagina .contenedor-centrado > *:nth-child(4) { animation-delay: 210ms; }
+.perfil-pagina .contenedor-centrado > *:nth-child(5) { animation-delay: 280ms; }
+
+@keyframes perfil-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.perfil-pagina .espacio-final {
+  height: 1rem;
+}
+
+/* ===== Tarjetas ===== */
+.perfil-pagina .tarjeta {
+  width: 100%;
+  margin-bottom: 1.25rem;
   padding: 1.5rem;
-  margin-bottom: 1.25rem;
-  border: 1px solid #3B4754;
-  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
-.perfil-pagina .contenedor-centrado > .tarjeta {
-  margin-bottom: 1.25rem;
-}
-
-/* Usuario */
-.usuario {
+/* ===== Usuario ===== */
+.perfil-pagina .usuario {
+  padding: 2rem 1.5rem;
   text-align: center;
-  padding: 2rem;
 }
-.avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: #272b36;
+
+.perfil-pagina .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 76px;
+  height: 76px;
   margin: 0 auto 1rem;
-}
-.avatar svg {
-  width: 40px;
-  height: 40px;
-  color: #9ca3af;
-}
-.usuario h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #fff;
-}
-.edad {
-  margin: 0.25rem 0 0 0;
-  color: #9ca3af;
-  font-size: 0.9rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(103, 4, 232, 0.35), rgba(24, 131, 189, 0.28));
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  box-shadow: 0 0 28px rgba(103, 4, 232, 0.25);
 }
 
-/* Estado */
-.estado {
-  background: #1d2227;
-  border: 1px solid #36414b;
-  border-radius: 10px;
-  padding: 0.75rem 1.25rem;
+.perfil-pagina .avatar svg {
+  width: 38px;
+  height: 38px;
+  color: #e0e7ff;
 }
-.estado h3 {
-  margin: 0 0 0.75rem;
-  font-size: 1.35rem;
-  color: #fff;
+
+.perfil-pagina .usuario h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.barra-niveles {
+
+.perfil-pagina .edad {
+  margin: 0.3rem 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* ===== Estado actual ===== */
+.perfil-pagina .estado h3 {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.perfil-pagina .barra-niveles {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
 }
-.nivel {
+
+.perfil-pagina .nivel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.4rem;
 }
-.barra-fondo {
-  width: 100%;
-  height: 16px;
-  border-radius: 999px;
+
+.perfil-pagina .barra-fondo {
   position: relative;
-}
-.barra-fondo.bajo {
-  background: #274a35;
-}
-.barra-fondo.medio {
-  background: #41391f;
-}
-.barra-fondo.alto {
-  background: #482a2c;
-}
-.barra-llena {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 33%;
-  background: #4caf50;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
   border-radius: 999px;
 }
-.etiqueta {
-  font-size: 1rem;
-  color: #9ca3af;
+
+.perfil-pagina .barra-fondo.bajo  { background: rgba(76, 175, 80, 0.2); }
+.perfil-pagina .barra-fondo.medio { background: rgba(234, 179, 8, 0.18); }
+.perfil-pagina .barra-fondo.alto  { background: rgba(239, 68, 68, 0.18); }
+
+.perfil-pagina .barra-llena {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.45);
 }
-.estado-texto {
-  margin: 0.5rem 0 0;
-  font-size: 1.1rem;
+
+.perfil-pagina .etiqueta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.perfil-pagina .estado-texto {
+  margin: 0;
+  font-size: 0.95rem;
   color: #e5e7eb;
 }
 
-/* Gráfico */
-.progreso h3 {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.1rem;
-  color: #fff;
+/* ===== Gráfico de progreso ===== */
+.perfil-pagina .progreso h3 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
-.progreso h3 svg {
+
+.perfil-pagina .progreso h3 svg {
   width: 20px;
   height: 20px;
-  color: #9ca3af;
+  color: #7dd3fc;
 }
-.grafico-wrapper {
+
+.perfil-pagina .grafico-wrapper {
   display: flex;
   gap: 0.75rem;
   margin-bottom: 0.5rem;
 }
-.eje-vertical {
+
+.perfil-pagina .eje-vertical {
+  padding-top: 0.5rem;
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--muted);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  padding-top: 0.5rem;
 }
-.grafico-area {
-  flex: 1;
+
+.perfil-pagina .grafico-area {
   position: relative;
-  min-height: 220px;
+  flex: 1;
   min-width: 0;
 }
-.rejilla {
+
+/* La rejilla ocupa exactamente la misma caja que el SVG (proporción 3:1),
+   así las líneas coinciden con los valores 1 a 4 de la gráfica */
+.perfil-pagina .rejilla {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  aspect-ratio: 3 / 1;
   pointer-events: none;
 }
-.linea-rejilla {
+
+.perfil-pagina .linea-rejilla {
   position: absolute;
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.07);
 }
-.linea-grafico {
+
+/* Se sobrescribe el top inline (0/25/50/75%) para alinear con y=25, 75, 125, 175 del SVG */
+.perfil-pagina .linea-rejilla:nth-child(1) { top: 12.5% !important; }
+.perfil-pagina .linea-rejilla:nth-child(2) { top: 37.5% !important; }
+.perfil-pagina .linea-rejilla:nth-child(3) { top: 62.5% !important; }
+.perfil-pagina .linea-rejilla:nth-child(4) { top: 87.5% !important; }
+
+.perfil-pagina .linea-grafico {
+  position: relative;
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 3 / 1;
+  overflow: visible;
 }
-.etiquetas-meses {
+
+.perfil-pagina .linea-grafico path {
+  stroke: #3b9ee0;
+  filter: drop-shadow(0 0 6px rgba(24, 131, 189, 0.55));
+}
+
+.perfil-pagina .linea-grafico g circle:first-child {
+  fill: var(--surface);
+  stroke: #3b9ee0;
+}
+
+.perfil-pagina .linea-grafico g circle:last-child {
+  fill: #7dd3fc;
+}
+
+.perfil-pagina .etiquetas-meses {
   display: flex;
   justify-content: space-between;
   padding: 0 8%;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--muted);
 }
-.etiqueta-eje-x {
-  text-align: right;
-  font-size: 0.75rem;
-  color: #9ca3af;
+
+.perfil-pagina .etiqueta-eje-x {
   margin-top: 0.25rem;
+  font-size: 0.75rem;
+  text-align: right;
+  color: var(--muted);
 }
-.ultima-prueba {
-  margin: 1rem 0 0 0;
+
+.perfil-pagina .ultima-prueba {
+  margin: 1rem 0 0;
   font-size: 0.9rem;
   color: #d1d5db;
 }
 
-/* Secciones */
-.seccion {
+/* ===== Secciones (Salud / Configuración) ===== */
+.perfil-pagina .seccion {
   margin-bottom: 2rem;
 }
-.titulo-seccion {
+
+.perfil-pagina .titulo-seccion {
+  margin: 0 0 1rem;
   font-size: 1.35rem;
-  margin: 0 0 1rem 0;
-  color: #fff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.bloque-opcion {
-  box-sizing: border-box;
-  background: #1C2126;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 0.75rem;
+
+.perfil-pagina .bloque-opcion {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border: 1px solid #3B4754;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
-.bloque-opcion h4 {
-  margin: 0 0 0.25rem 0;
-  font-size: 0.95rem;
-  color: #e5e7eb;
+
+.perfil-pagina .bloque-opcion h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #ffffff;
 }
-.valor {
+
+.perfil-pagina .valor {
   margin: 0;
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--muted);
 }
-.btn-agregar {
-  background: #272b3f;
-  color: #e5e7eb;
-  border: none;
-  border-radius: 8px;
+
+.perfil-pagina .btn-agregar {
   padding: 0.5rem 1rem;
-  cursor: pointer;
+  font-family: inherit;
   font-size: 0.85rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.recomendaciones {
+
+.perfil-pagina .btn-agregar:hover {
+  background: var(--grad);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(103, 4, 232, 0.4);
+}
+
+.perfil-pagina .btn-agregar:focus-visible,
+.perfil-pagina .opcion-menu:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+/* Recomendaciones */
+.perfil-pagina .recomendaciones {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.75rem;
 }
-.cabecera-recomendaciones {
-  width: 100%;
+
+.perfil-pagina .cabecera-recomendaciones {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
-.flecha {
-  color: #9ca3af;
+
+.perfil-pagina .cabecera-recomendaciones h4 {
+  margin: 0;
 }
-.recomendaciones ul {
+
+.perfil-pagina .cabecera-recomendaciones img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+
+.perfil-pagina .recomendaciones ul {
   margin: 0;
   padding-left: 1.25rem;
 }
-.recomendaciones li {
-  font-size: 0.9rem;
-  color: #d1d5db;
+
+.perfil-pagina .recomendaciones li {
   margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #d1d5db;
+}
+
+.perfil-pagina .recomendaciones li::marker {
+  color: #7dd3fc;
 }
 
 /* Configuración */
-.opcion-menu {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding: 1.1rem 0;
+.perfil-pagina .opcion-menu {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #e5e7eb;
-  font-size: 1rem;
-  cursor: pointer;
+  width: 100%;
+  margin-bottom: 0.6rem;
+  padding: 0.95rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.98rem;
   text-align: left;
+  color: #e5e7eb;
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
-.opcion-menu .icono {
+
+.perfil-pagina .opcion-menu:hover {
+  border-color: rgba(129, 140, 248, 0.55);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+.perfil-pagina .opcion-menu .icono {
   width: 22px;
   text-align: center;
 }
-.opcion-menu.peligro {
-  color: #ef4444;
+
+.perfil-pagina .opcion-menu.peligro {
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.25);
 }
 
-/* ===== BARRA DE NAVEGACIÓN — NO FIJA, VA AL FINAL ===== */
+.perfil-pagina .opcion-menu.peligro:hover {
+  border-color: rgba(239, 68, 68, 0.6);
+  background-color: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+}
+
+/* ===== Barra inferior flotante (igual que Menú / Historial) ===== */
 .perfil-pagina .toolbar-container {
-  background: #121417;
-  padding: 0.75rem max(1rem, calc((100% - 720px) / 2 + 1rem));
-  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-  max-width: none;
-  box-sizing: border-box;
-  margin-top: auto; /* Se pega al final del contenido */
-}
-
-/* Línea — ocupa todo el ancho */
-.perfil-pagina .toolbar-container hr {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  width: calc(100% - 1.5rem);
+  max-width: 480px;
   margin: 0;
-  border: none;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  width: 100%;
+  padding: 0.5rem;
+  background: rgba(20, 24, 31, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  z-index: 50;
 }
 
-/* Íconos distribuidos */
+/* La línea separadora ya no hace falta con la barra flotante */
+.perfil-pagina .toolbar-container hr {
+  display: none;
+}
+
 .perfil-pagina .toolsBar {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 3vw, 1.5rem);
-  align-items: center;
+  gap: 0.25rem;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .perfil-pagina .iconBar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  color: #6b7280;
-  cursor: pointer;
-  transition: color 0.2s ease;
+  justify-content: center;
+  gap: 0.3rem;
   min-width: 0;
+  padding: 0.55rem 0.25rem;
+  border-radius: 16px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.perfil-pagina .iconBar img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+.perfil-pagina .iconBar:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
 .perfil-pagina .iconBar p {
@@ -342,24 +498,54 @@
   white-space: nowrap;
 }
 
-.perfil-pagina .iconBar.activo img {
+.perfil-pagina .iconBar img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+/* Pestaña activa (el JSX usa "activo"; se acepta también "active") */
+.perfil-pagina .iconBar.activo,
+.perfil-pagina .iconBar.active {
+  background: var(--grad);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(103, 4, 232, 0.45);
+}
+
+.perfil-pagina .iconBar.activo img,
+.perfil-pagina .iconBar.active img {
   opacity: 1;
 }
 
-.perfil-pagina .iconBar.active img {
-  filter: none;
-  background: linear-gradient(to right, #6704E8 0%, #1883BD 100%);
-  mix-blend-mode: multiply;
-}
-
+/* ===== Responsive ===== */
 @media (max-width: 480px) {
-  .perfil-pagina .toolbar-container {
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
+  .perfil-pagina .contenedor-centrado {
+    padding-top: 1.25rem;
   }
 
-  .perfil-pagina .toolsBar {
-    gap: 0.25rem;
+  .perfil-pagina .tarjeta {
+    padding: 1.125rem;
+    border-radius: 16px;
+  }
+
+  .perfil-pagina .usuario {
+    padding: 1.5rem 1rem;
+  }
+
+  .perfil-pagina .grafico-wrapper {
+    gap: 0.5rem;
+  }
+
+  .perfil-pagina .bloque-opcion {
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+
+  .perfil-pagina .titulo-seccion {
+    font-size: 1.2rem;
   }
 
   .perfil-pagina .iconBar img {
@@ -367,50 +553,19 @@
     height: 24px;
   }
 
-  .contenedor-centrado {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+  .perfil-pagina .iconBar p {
+    font-size: 0.7rem;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .perfil-pagina .contenedor-centrado > * {
+    animation: none;
   }
 
-  .tarjeta {
-    padding: 1.125rem;
-    border-radius: 12px;
-  }
-
-  .usuario {
-    padding: 1.5rem 1rem;
-  }
-
-  .estado {
-    padding: 0.75rem 1rem;
-  }
-
-  .estado h3 {
-    font-size: 1.2rem;
-  }
-
-  .etiqueta {
-    font-size: 0.875rem;
-  }
-
-  .estado-texto {
-    font-size: 1rem;
-  }
-
-  .grafico-wrapper {
-    gap: 0.5rem;
-  }
-
-  .grafico-area {
-    min-height: 180px;
-  }
-
-  .bloque-opcion {
-    gap: 0.75rem;
-    padding: 0.875rem 1rem;
-  }
-
-  .opcion-menu {
-    padding: 0.9rem 0;
+  .perfil-pagina *,
+  .perfil-pagina *::before {
+    transition: none !important;
   }
 }

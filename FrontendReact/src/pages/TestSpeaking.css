@@ -1,5 +1,13 @@
+/* ===== Tokens (los mismos que las otras pantallas) ===== */
+.test-speaking {
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.08);
+  --violet: #6704e8;
+  --blue: #1883bd;
+  --grad: linear-gradient(90deg, var(--violet) 0%, var(--blue) 100%);
+}
 
-/* Contenedor general */
+/* ===== Contenedor general ===== */
 .test-speaking {
   min-height: 100vh;
   display: flex;
@@ -8,9 +16,12 @@
   padding: 1.5rem;
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background:
+    radial-gradient(600px 300px at 10% -5%, rgba(103, 4, 232, 0.22), transparent 70%),
+    radial-gradient(500px 280px at 95% 0%, rgba(24, 131, 189, 0.18), transparent 70%);
 }
 
-/* Cabecera */
+/* ===== Cabecera ===== */
 .test-speaking .header {
   display: flex;
   align-items: center;
@@ -20,64 +31,103 @@
   margin-bottom: 2rem;
 }
 
-.arrow-left-icon {
+.test-speaking .arrow-left-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.arrow-left-icon img {
+.test-speaking .arrow-left-icon:hover {
+  background: rgba(103, 4, 232, 0.22);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+.test-speaking .arrow-left-icon:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+.test-speaking .arrow-left-icon img {
   width: 20px;
   height: 20px;
   filter: brightness(0) invert(1);
 }
 
-.header-left {
+.test-speaking .header-left {
   flex: 1;
   min-width: 0;
 }
 
-.title-row h1 {
+.test-speaking .title-row h1 {
   margin: 0;
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   white-space: nowrap;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.subtitulo {
+.test-speaking .subtitulo {
   margin: 0.25rem 0 0;
-  color: #98989f;
+  color: var(--muted);
   font-size: 0.9rem;
 }
 
-/* Temporizador */
-.timer {
+/* ===== Temporizador ===== */
+.test-speaking .timer {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   margin-left: auto;
-  padding: 0.3rem 0.75rem;
-  border-radius: 12px;
-  background: #2c2c3e;
-  color: #fff;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(24, 131, 189, 0.14);
+  border: 1px solid rgba(125, 211, 252, 0.28);
+  color: #dbeafe;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   line-height: 1;
   flex-shrink: 0;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-.icono-reloj {
+.test-speaking .icono-reloj {
+  display: flex;
   font-size: 0.85rem;
 }
 
-.timer.poco-tiempo {
-  background: #ff3b30;
+.test-speaking .icono-reloj img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
 }
 
-/* Instrucciones */
+.test-speaking .timer.poco-tiempo {
+  background: rgba(255, 59, 48, 0.2);
+  border-color: rgba(255, 59, 48, 0.7);
+  color: #ffd7d4;
+  animation: pulso-tiempo 1.6s ease-in-out infinite;
+}
+
+@keyframes pulso-tiempo {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.45); }
+  50%      { box-shadow: 0 0 0 7px rgba(255, 59, 48, 0); }
+}
+
+/* ===== Instrucciones ===== */
 .test-speaking .test-instructions {
   display: flex;
   flex-direction: column;
@@ -86,143 +136,371 @@
   max-width: 800px;
 }
 
+.test-speaking .test-instructions > h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
 .test-speaking .test-instructions > p {
   color: #d0d0d5;
   font-size: 0.95rem;
-    margin: 0 !important;
-  line-height: 1.5 !important;
+  margin: 0 !important;
+  line-height: 1.6 !important;
 }
 
 .test-speaking .test-instructions .graytainer {
   margin-top: 0.5rem;
   color: #a0a0a5;
-
-  padding: 1rem 1.25rem !important; 
-  gap: 0.5rem !important; 
-  min-height: auto !important; 
-  height: fit-content !important; 
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  padding: 1rem 1.25rem !important;
+  gap: 0.5rem !important;
+  min-height: auto !important;
+  height: fit-content !important;
 }
 
-.tips-container.tips-container {
+.test-speaking .test-instructions .graytainer h3 {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Tips: barra de acento a la izquierda */
+.test-speaking .tips-container.tips-container {
+  position: relative;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
   text-align: left;
-}
-.test-speaking .audio-invitation {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 0.5rem;
+  background-image: linear-gradient(90deg, rgba(103, 4, 232, 0.12), rgba(24, 131, 189, 0.04));
 }
 
+.test-speaking .tips-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--grad);
+}
+
+.test-speaking .tips-container p {
+  margin: 0;
+  color: #b8bcc6;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* ===== Invitación al audio ===== */
 .test-speaking .audio-invitation {
-  margin-top: 1rem;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
   width: 100%;
   max-width: 800px;
+  margin-top: 2rem;
 }
-/*-------*/
 
-.audio-recorder {
+.test-speaking .audio-invitation h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.test-speaking .vol-icon {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* ===== Grabadora (el elemento protagonista) ===== */
+.test-speaking .audio-recorder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 0.75rem;
+  padding: 2rem 1rem 1.5rem;
+  background:
+    radial-gradient(260px 140px at 50% 35%, rgba(103, 4, 232, 0.18), transparent 70%),
+    #14181f;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
-.recorder-button {
-  width: 96px;
-  height: 96px;
-  border-radius: 28px;              /* forma de botón redondeado */
+.test-speaking .recorder-button {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  border-radius: 30px;
   background: linear-gradient(180deg, #5A18C9 0%, #3B30AD 50%, #1B6398 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
-  box-shadow: 0 8px 24px rgba(74, 25, 182, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  padding: 0;
+  box-shadow:
+    0 10px 28px rgba(74, 25, 182, 0.45),
+    0 0 0 8px rgba(103, 4, 232, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-.recorder-button:hover {
+.test-speaking .recorder-button:hover {
   transform: scale(1.05);
 }
 
-.recorder-button:active {
+.test-speaking .recorder-button:active {
   transform: scale(0.96);
 }
 
-.recorder-button img {
-  width: 40px;
-  height: 40px;
+.test-speaking .recorder-button:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 6px;
+}
+
+.test-speaking .recorder-button img {
+  width: 42px;
+  height: 42px;
   filter: brightness(0) invert(1);
 }
 
-.audio-recorder p {
-  color: #9ca3af;
+/* Grabando: rojo con ondas que se expanden (única animación continua del botón) */
+.test-speaking .recorder-button.grabando {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%);
+  box-shadow:
+    0 10px 28px rgba(239, 68, 68, 0.45),
+    0 0 0 8px rgba(239, 68, 68, 0.14);
+}
+
+.test-speaking .recorder-button.grabando::before,
+.test-speaking .recorder-button.grabando::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(239, 68, 68, 0.6);
+  animation: onda-grabando 1.8s ease-out infinite;
+}
+
+.test-speaking .recorder-button.grabando::after {
+  animation-delay: 0.9s;
+}
+
+@keyframes onda-grabando {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+.test-speaking .audio-recorder p {
+  color: var(--muted);
   font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
+/* ===== Botones ===== */
+.test-speaking .botones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-direction: row;
+  max-width: 800px;
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.test-speaking #btn-guardar {
+  background-color: #293038 !important;
+  border: 1px solid var(--line) !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.test-speaking #btn-guardar:hover {
+  background-color: #1b2025 !important;
+}
+
+.test-speaking #btn-enviar {
+  background: var(--grad) !important;
+  border: none !important;
+  box-shadow: 0 8px 22px rgba(103, 4, 232, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+}
+
+.test-speaking #btn-enviar:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 28px rgba(103, 4, 232, 0.55);
+}
+
+.test-speaking #btn-guardar:focus-visible,
+.test-speaking #btn-enviar:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 3px;
+}
+
+/* ===== Pie ===== */
+.test-speaking .footer-test {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 0.2rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 280px;
+  flex-direction: row;
+  color: #949596;
+}
+
+.test-speaking .footer-item {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
+  color: #949596;
+  font-size: 0.85rem;
+}
+
+.test-speaking .footer-item p {
   margin: 0;
 }
 
-
-
-/*----*/
-.botones{
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-direction: row;
-    max-width: 800px;
-    width: 100%;
-    margin-top: 4rem;
-    margin-bottom: 0,5rem;
-}
-#btn-guardar{
-    background-color: #293038 !important;
-}
-#btn-guardar:hover{
-    background-color: #1b2025 !important;
+.test-speaking .footer-icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
 }
 
-.footer-test {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 0,2rem;
-    padding: 1rem 0;
-    width: 100%;
-    max-width: 280px;
-    flex-direction: row;
-    justify-content: center;
-    color: #949596;
-}
-.footer-item {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    gap: 0.5rem;
-    color: #949596;
-    font-size: 0.85rem;
-}
-.footer-icon {
-    width: 16px;
-    height: 16px;
-    filter: brightness(0) invert(1);
-}
-
-
-
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 767px) {
   .test-speaking {
     padding: 1rem;
   }
 
-  .title-row h1 {
-    font-size: 1.15rem;
+  .test-speaking .title-row h1 {
+    font-size: 1.2rem;
   }
 
-  .timer {
+  .test-speaking .timer {
     margin-top: 0.5rem;
   }
+
+  .test-speaking .botones {
+    margin-top: 2rem;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .test-speaking .timer.poco-tiempo,
+  .test-speaking .recorder-button.grabando::before,
+  .test-speaking .recorder-button.grabando::after {
+    animation: none;
+  }
+
+  .test-speaking *,
+  .test-speaking *::before {
+    transition: none !important;
+  }
+}
+
+/* ===== Responsive extendido (320px → escritorio) ===== */
+.test-speaking {
+  overflow-x: clip;
+}
+
+@media (min-width: 1024px) {
+  .test-speaking {
+    padding: 2.5rem 2rem 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .test-speaking .header {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .test-speaking .title-row h1 {
+    font-size: clamp(1.1rem, 4.6vw, 1.5rem);
+    line-height: 1.2;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-speaking .header {
+    flex-wrap: wrap;
+  }
+
+  .test-speaking .header-left {
+    flex-basis: calc(100% - 3.5rem);
+  }
+
+  .test-speaking .timer {
+    margin: 0 0 0 auto;
+  }
+
+  .test-speaking .botones {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 2rem;
+  }
+
+  .test-speaking .botones > * {
+    width: 100%;
+  }
+
+  .test-speaking .footer-test {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-speaking .audio-recorder {
+    padding: 1.5rem 0.75rem 1.25rem;
+  }
+
+  .test-speaking .recorder-button {
+    width: 92px;
+    height: 92px;
+  }
+}
+
+/* ===== Fix: scroll horizontal ===== */
+/* El selector `.test-speaking *` no incluye al propio contenedor raíz, así que con
+   width:100% + padding (content-box) se desbordaba 2 x el padding. */
+.test-speaking {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Graytainer lleva padding (y ahora borde): sin border-box se pasa del ancho */
+.test-speaking .graytainer {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.test-speaking .botones {
+  flex-wrap: wrap;
 }

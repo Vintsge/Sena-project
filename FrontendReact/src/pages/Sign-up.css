@@ -1,88 +1,246 @@
-
-    form {
-        width: 100%;
-        max-width: 600px;
-    }
-
+/* ===== Tokens (los mismos que las otras pantallas) ===== */
 .signup-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background-color: #0B0F14;
-    }
-
-.signup-container h1 {
-        color: #00bcd4;
-        font-family: Arial, sans-serif;
-        margin-bottom: 0.2rem;
-    }
-    .form-group {
-        margin: 0 auto 1rem auto;
-        display: flex;
-        flex-direction: column;
-        background-color: #121417;
-        padding: 2rem;
-        gap: 1rem;
-        width: 100%;
-        box-sizing: border-box;
-        border-radius: 8px;
-        box-shadow:  0 4px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .form-label {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        font-weight: bold;
-        width: 100%;
-    }
-
-    .form-label input,
-    .form-label select {
-        width: 100%;
-        box-sizing: border-box;
-        background-color: #1b2025;
-        border: 2px solid #374451;
-        border-radius: 24px;
-        color: #ffffff;
-        height: 45px;
-        padding: 1px 20px
-
-    }
-
-    .form-label input:focus,
-    .form-label select:focus {
-        outline: none;
-        border-color: #00bcd4;
-    }
-    .button-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        width: 100%;
-    }
-
-    select {
-  /* Aumenta el valor de la derecha (el segundo o cuarto valor según tu taquigrafía) */
-  padding-right: 20px; 
+  --muted: #9ca3af;
+  --line: rgba(255, 255, 255, 0.08);
+  --violet: #6704e8;
+  --blue: #1883bd;
+  --grad: linear-gradient(90deg, var(--violet) 0%, var(--blue) 100%);
 }
 
-.form-group select {
-  /* 1. Oculta por completo la flecha fea y rígida del navegador */
+/* ===== Contenedor ===== */
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 2rem 1.5rem 3rem;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background:
+    radial-gradient(600px 300px at 10% -5%, rgba(103, 4, 232, 0.22), transparent 70%),
+    radial-gradient(500px 280px at 95% 0%, rgba(24, 131, 189, 0.18), transparent 70%),
+    #0b0f14;
+}
+
+.signup-container *,
+.signup-container *::before,
+.signup-container *::after {
+  box-sizing: border-box;
+}
+
+/* ===== Título ===== */
+.signup-container h1 {
+  margin: 0 0 0.75rem;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-align: center;
+  background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 55%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.signup-container hr {
+  width: 100%;
+  max-width: 600px;
+  height: 1px;
+  margin: 0 0 1.5rem;
+  border: 0;
+  background: linear-gradient(90deg, transparent, rgba(103, 4, 232, 0.7), rgba(24, 131, 189, 0.7), transparent);
+}
+
+/* ===== Formulario ===== */
+.signup-container form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.signup-container .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+  margin: 0 auto 1rem;
+  padding: 2rem;
+  background: #14181f;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: signup-entra 0.5s ease both;
+}
+
+@keyframes signup-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Campos ===== */
+.signup-container .form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.signup-container .form-label input,
+.signup-container .form-label select {
+  width: 100%;
+  height: 46px;
+  padding: 1px 20px;
+  font: inherit;
+  font-size: 1rem; /* 16px evita el zoom automático en iOS */
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #1b2025;
+  border: 2px solid #2b3441;
+  border-radius: 24px;
+  color-scheme: dark; /* íconos de fecha y selector legibles */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.signup-container .form-label input:hover,
+.signup-container .form-label select:hover {
+  border-color: #3b4756;
+}
+
+.signup-container .form-label input:focus,
+.signup-container .form-label select:focus {
+  outline: none;
+  background-color: #1f2630;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 4px rgba(103, 4, 232, 0.22);
+}
+
+/* Solo marca el error después de que la persona interactuó */
+.signup-container .form-label input:user-invalid,
+.signup-container .form-label select:user-invalid {
+  border-color: rgba(239, 68, 68, 0.7);
+}
+
+/* Select: flecha propia */
+.signup-container .form-group select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
-  /* 2. Añade espacio suficiente a la derecha para que no tape el texto */
-  padding-right: 35px;
-
-  /* 3. Coloca un icono propio (puedes usar un SVG en código o URL) */
+  padding-right: 40px;
+  cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  
-  /* 4. Aquí controlas EXACTAMENTE dónde se ubica: a 16px del borde derecho y centrada verticalmente */
   background-position: right 16px center;
   background-size: 16px;
+}
+
+.signup-container .form-group select option {
+  background-color: #1b2025;
+  color: #ffffff;
+}
+
+/* ===== Checkboxes ===== */
+.signup-container .checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  padding: 1rem 1.1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.signup-container .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.92rem;
+  color: #c9ccd3;
+  cursor: pointer;
+}
+
+.signup-container .checkbox-label input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #6704e8;
+}
+
+.signup-container .checkbox-label input[type="checkbox"]:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+/* ===== Botón ===== */
+.signup-container .button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.signup-container #signup-button {
+  background: var(--grad);
+  border: none;
+  box-shadow: 0 8px 22px rgba(103, 4, 232, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.signup-container #signup-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 28px rgba(103, 4, 232, 0.55);
+}
+
+.signup-container #signup-button:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 3px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .signup-container {
+    justify-content: flex-start;
+    padding: 1.5rem 1rem 2.5rem;
+  }
+
+  .signup-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .signup-container .form-group {
+    padding: 1.25rem;
+    gap: 1rem;
+    border-radius: 16px;
+  }
+
+  .signup-container .button-container > * {
+    width: 100%;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .signup-container .form-group {
+    animation: none;
+  }
+
+  .signup-container *,
+  .signup-container *::before {
+    transition: none !important;
+  }
 }

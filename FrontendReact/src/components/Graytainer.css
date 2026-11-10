@@ -1,54 +1,44 @@
+/* ===== Base del componente Graytainer ===== */
+/* Los colores usan variables de las pantallas (con valor por defecto),
+   así que sigue funcionando si se usa en un lugar sin esos tokens. */
 .graytainer {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #1b2025;
-    padding: 20px;
-    border: 2px solid #374451;
-    border-radius: 12px;
-    gap: 20px;
-
-    
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* lo necesitan el textarea + contador y el apilado en móvil */
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box; /* evita que padding + borde se salgan del 100% de ancho */
+  min-width: 0;
+  padding: 20px;
+  background-color: var(--card, #14181f);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
 }
 
 .graytainer.reverse {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
-
-/* ===== OCULTAR IMAGEN CUANDO ES NULL ===== */
+/* ===== Ocultar la imagen cuando es null o está vacía ===== */
 .graytainer img.Icon {
   transition: none;
 }
 
-/* Cuando la imagen es null o vacía — la borramos */
 .graytainer img.Icon[src="null"],
-.graytainer img.Icon[src=""] {
+.graytainer img.Icon[src=""],
+.graytainer img.Icon:not([src]) {
   display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  border: none !important;
-  outline: none !important;
-  background: transparent !important;
-  opacity: 0 !important;
-  position: absolute;
-  right: -9999px;
 }
 
-/* ===== Cuando no hay imagen — el contenedor se ajusta ===== */
+/* ===== Sin imagen: el contenido se centra ===== */
 .graytainer:has(img.Icon[src="null"]),
-.graytainer:has(img.Icon[src=""]) {
+.graytainer:has(img.Icon[src=""]),
+.graytainer:has(img.Icon:not([src])) {
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
   gap: 0 !important;
   padding: 2rem 1.5rem !important;
-}
-
-/* Fallback para navegadores que no soportan :has */
-.graytainer {
-  display: flex;
-  flex-wrap: wrap;
 }

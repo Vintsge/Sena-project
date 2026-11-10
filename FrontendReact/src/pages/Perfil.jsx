@@ -1,21 +1,11 @@
 import './Perfil.css';
-import Inicio from '../assets/house.svg';
-import History from '../assets/history.svg';
-import User from '../assets/perfilUser.svg';
-import { useState } from 'react';
-import Right from '../assets/arrow-right.svg'
-
-const progreso = [
-  { mes: 1, valor: 2 },
-  { mes: 2, valor: 3 },
-  { mes: 3, valor: 1 },
-  { mes: 4, valor: 4 },
-  { mes: 5, valor: 3 },
-  { mes: 6, valor: 2 },
-  { mes: 7, valor: 3 },
-];
+import Right from '../assets/arrow-right.svg';
+import { useNavigate } from 'react-router-dom';
+import BottomNav from '../components/Bottomnav';
 
 function Perfil() {
+  const navigate = useNavigate();
+
   return (
     <div className="perfil-pagina">
       <div className="contenedor-centrado">
@@ -151,7 +141,7 @@ function Perfil() {
           <button className="opcion-menu">
             <span className="icono">🌐</span> Idioma
           </button>
-          <button className="opcion-menu">
+          <button className="opcion-menu" onClick={() => navigate('/')}>
             <span className="icono">↗</span> Cerrar Sesión
           </button>
           <button className="opcion-menu peligro">
@@ -162,24 +152,8 @@ function Perfil() {
         <div className="espacio-final"></div>
       </div>
 
-      {/* Barra de navegación — ESTRUCTURA ORIGINAL */}
-      <footer className="toolbar-container">
-        <hr />
-        <div className="toolsBar">
-          <div className="iconBar">
-            <img src={Inicio} alt="Home page"/>
-            <p>Inicio</p>
-          </div>
-          <div className="iconBar">
-            <img src={History} alt="Historial" /> 
-            <p>Historial</p>
-          </div>
-          <div className="iconBar activo">
-            <img src={User} alt="Perfil" />
-            <p>Perfil</p>
-          </div>
-        </div>
-      </footer>
+      {/* Barra de navegación compartida: marca "Perfil" como activo según la ruta */}
+      <BottomNav />
     </div>
   );
 }
