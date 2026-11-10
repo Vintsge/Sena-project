@@ -1,7 +1,7 @@
 import './SelectWritting.css';
 import { useNavigate } from 'react-router-dom';
 import Graytainer from '../components/Graytainer';
-import CardLink from '../components/CardLink';
+import CardLink from '../components/Cardlink';
 import Email from '../assets/mail.svg';
 import Calendar from '../assets/calendar.svg';
 import Image from '../assets/image.svg';

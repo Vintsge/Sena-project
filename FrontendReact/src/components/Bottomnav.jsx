@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import './BottomNav.css';
+import './Bottomnav.css';
 import Inicio from '../assets/house.svg';
 import History from '../assets/history.svg';
 import User from '../assets/perfilUser.svg';

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './CardLink.css';
+import './Cardlink.css';
 
 // Envuelve un <Graytainer> para convertirlo en enlace sin tocar el componente Graytainer.
 function CardLink({ to, state, children }) {

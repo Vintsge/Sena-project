@@ -1,6 +1,6 @@
 import './Menu.css';
 import Graytainer from '../components/Graytainer';
-import CardLink from '../components/CardLink';
+import CardLink from '../components/Cardlink';
 import BottomNav from '../components/Bottomnav';
 import AddIcon from '../assets/Add.svg';
 import Comparar from '../assets/comparar.svg';
